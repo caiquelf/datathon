@@ -3,6 +3,16 @@ import streamlit as st
 st.set_page_config(page_title='Decision AI', layout='wide')
 st.title('Decision AI – Plataforma de Recrutamento Inteligente')
 
+from pathlib import Path
+ART = Path(__file__).resolve().parents[0] / "artifacts"
+if not (ART / "tfidf.joblib").exists():
+    import src.build_index as bi
+    bi.main()
+if not (ART / "clusters_meta.joblib").exists():
+    import src.clustering_unsup as cu
+    cu.main()
+
+
 @st.cache_resource
 def load_artifacts():
     from pathlib import Path
