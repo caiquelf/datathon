@@ -1,3 +1,10 @@
 
 data/raw/
 *.json
+artifacts/
+data/raw/
+*.npz
+*.pkl
+*.joblib
+*.csv
+
