@@ -1,9 +1,0 @@
-
-data/raw/
-*.json
-artifacts/
-*.npz
-*.pkl
-*.joblib
-*.csv
-

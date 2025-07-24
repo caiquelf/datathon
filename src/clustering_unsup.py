@@ -1,9 +1,6 @@
-
-
 import json
 import re
 from pathlib import Path
-
 import joblib
 import numpy as np
 import pandas as pd
@@ -70,7 +67,13 @@ def build_clean_series(dc: pd.DataFrame) -> pd.Series:
 # ----------------------- Main -----------------------
 def main():
 
-    dc = pd.read_pickle(ART / "cands_meta.pkl")
+    cand_pkl = ART / "cands_meta.pkl"
+    if cand_pkl.exists():
+        dc = pd.read_pickle(cand_pkl)
+    else:
+        import lzma, pickle
+        with lzma.open(ART / "cands_meta_light.pkl.xz", "rb") as f:
+            dc = pickle.load(f)
 
     texts = build_clean_series(dc).map(clean)
 
